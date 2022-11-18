@@ -7,18 +7,18 @@ import org.keycloak.models.IdentityProviderModel;
 import org.keycloak.models.KeycloakSession;
 
 // Id 값을 넣어주고 Provider를 생성해준다.
-public class NaverIdentityProviderFactory extends AbstractIdentityProviderFactory<NaverIdentityProvider> implements SocialIdentityProviderFactory<NaverIdentityProvider> {
+public class KakaoIdentityProviderFactory extends AbstractIdentityProviderFactory<KakaoIdentityProvider> implements SocialIdentityProviderFactory<KakaoIdentityProvider> {
 
-    public static final String PROVIDER_ID = "naver";
+    public static final String PROVIDER_ID = "Kakao";
 
     @Override
     public String getName() {
-        return "Naver";
+        return "Kakao";
     }
 
     @Override
-    public NaverIdentityProvider create(KeycloakSession session, IdentityProviderModel model) {
-        return new NaverIdentityProvider(session, new OAuth2IdentityProviderConfig(model));
+    public KakaoIdentityProvider create(KeycloakSession session, IdentityProviderModel model) {
+        return new KakaoIdentityProvider(session, new OAuth2IdentityProviderConfig(model));
     }
 
     @Override

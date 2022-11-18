@@ -7,7 +7,7 @@ plugins {
 
 group = 'com.nexgrid'
 version = '0.0.1-SNAPSHOT'
-description = 'Identity Provider - Naver'
+description = 'Identity Provider - Kakao'
 sourceCompatibility = '11'
 
 repositories {

@@ -2,10 +2,10 @@ package com.nexgrid.keycloaksocialnaver;
 
 import org.keycloak.broker.oidc.mappers.AbstractJsonUserAttributeMapper;
 
-public class NaverUserAttributeMapper extends AbstractJsonUserAttributeMapper {
+public class KakaoUserAttributeMapper extends AbstractJsonUserAttributeMapper {
 
 
-    private static final String[] cp = new String[] { NaverIdentityProviderFactory.PROVIDER_ID };
+    private static final String[] cp = new String[] { KakaoIdentityProviderFactory.PROVIDER_ID };
 
     @Override
     public String[] getCompatibleProviders() {
@@ -14,6 +14,6 @@ public class NaverUserAttributeMapper extends AbstractJsonUserAttributeMapper {
 
     @Override
     public String getId() {
-        return "naver-user-attribute-mapper";
+        return "kakao-user-attribute-mapper";
     }
 }

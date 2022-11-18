@@ -11,14 +11,14 @@ import org.keycloak.broker.social.SocialIdentityProvider;
 import org.keycloak.events.EventBuilder;
 import org.keycloak.models.KeycloakSession;
 
-public class NaverIdentityProvider extends AbstractOAuth2IdentityProvider implements SocialIdentityProvider {
+public class KakaoIdentityProvider extends AbstractOAuth2IdentityProvider implements SocialIdentityProvider {
 
-    public static final String AUTH_URL = "https://nid.naver.com/oauth2.0/authorize";
-    public static final String TOKEN_URL = "https://nid.naver.com/oauth2.0/token";
-    public static final String PROFILE_URL = "https://openapi.naver.com/v1/nid/me";
+    public static final String AUTH_URL = "https://kauth.kakao.com/oauth/authorize";
+    public static final String TOKEN_URL = "https://kauth.kakao.com/oauth/token";
+    public static final String PROFILE_URL = "https://kapi.kakao.com/v2/user/me";
     public static final String DEFAULT_SCOPE = "basic";
 
-    public NaverIdentityProvider(KeycloakSession session, OAuth2IdentityProviderConfig config) {
+    public KakaoIdentityProvider(KeycloakSession session, OAuth2IdentityProviderConfig config) {
         super(session, config);
         config.setAuthorizationUrl(AUTH_URL);
         config.setTokenUrl(TOKEN_URL);
@@ -36,7 +36,7 @@ public class NaverIdentityProvider extends AbstractOAuth2IdentityProvider implem
     }
 
     @Override
-    protected BrokeredIdentityContext extractIdentityFromProfile(EventBuilder event, JsonNode profile) { // 네이버 Profile 내용 반환
+    protected BrokeredIdentityContext extractIdentityFromProfile(EventBuilder event, JsonNode profile) {
         BrokeredIdentityContext user = new BrokeredIdentityContext(profile.get("response").get("id").asText());
 
         String email = profile.get("response").get("email").asText();
@@ -52,7 +52,7 @@ public class NaverIdentityProvider extends AbstractOAuth2IdentityProvider implem
     }
 
     @Override
-    protected BrokeredIdentityContext doGetFederatedIdentity(String accessToken) { // 실제로 네이버에 인증 요청을 하고 토큰을 받아오는 역할, 토큰을 이용해 profile을 가져오는 역할을 수행하는 메소드
+    protected BrokeredIdentityContext doGetFederatedIdentity(String accessToken) {
         try {
             JsonNode profile = SimpleHttp.doGet(PROFILE_URL, session).param("access_token", accessToken).asJson();
 
@@ -65,7 +65,7 @@ public class NaverIdentityProvider extends AbstractOAuth2IdentityProvider implem
     }
 
     @Override
-    protected String getDefaultScopes() { // 네이버 개발가이드에도 나와있듯이 scope 값이 필요 없기 때문에 여기서는 빈 문자열을 반환
+    protected String getDefaultScopes() {
         return "";
     }
 }
